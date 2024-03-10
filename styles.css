@@ -1,0 +1,43 @@
+* {
+  margin: auto;
+  padding: 0;
+}
+body {
+  background: #fff;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+svg path {
+  fill: #0047ab;
+  stroke: #eee;
+  stroke-width: 0.25;
+}
+svg path:hover {
+  fill: #00ccff;
+  transition: 0.43s;
+  cursor: pointer;
+}
+/* styles.css */
+
+/* styles.css */
+
+#infoBox {
+  position: absolute;
+  background-color: #fff;
+  padding: 8px; /* کاهش پدینگ */
+  border: 1px solid #ccc;
+  border-radius: 5px; /* گرد کردن لبه‌ها */
+  display: none;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0; /* ابتدایی: شفاف */
+  transform: translateY(-10px); /* تاخیر: انتقال به بالا */
+  font-family: "Arial", sans-serif; /* فونت جذاب */
+  font-size: 14px;
+}
+
+#infoBox.show {
+  display: block;
+  opacity: 1; /* نمایش: کاملاً قابل رویت */
+  transform: translateY(0); /* حذف تاخیر: انتقال به بالا */
+}
