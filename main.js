@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.appendChild(newDiv);
 
   const infoBox = document.getElementById("infoBox");
-
   const paths = document.querySelectorAll("path");
 
   paths.forEach((path) => {
@@ -23,18 +22,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
 
-    infoBox.style.left = mouseX + "px";
-    infoBox.style.top = mouseY + "px";
-    infoBox.innerHTML = `${regionName}<br>${regionInfo}`;
+    const apiUrl = "https://api.codebazan.ir/weather/?city=" + regionName;
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // استفاده از اطلاعات دریافتی از API به عنوان regionInfo
+        const regionInfo = `Temperature: ${data.temperature}°C, Condition: ${data.condition}`;
 
-    setTimeout(() => {
-      infoBox.classList.add("show");
-    }, 700);
-  }
+        infoBox.style.left = mouseX + "px";
+        infoBox.style.top = mouseY + "px";
+        infoBox.innerHTML = `${regionName}<br>${regionInfo}`;
 
-  function hideRegionInfo() {
-    setTimeout(() => {
-      infoBox.classList.remove("show");
-    }, 200);
+        setTimeout(() => {
+          infoBox.classList.add("show");
+        }, 700);
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+      });
   }
 });
