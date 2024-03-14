@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error fetching weather data:", error);
       });
   }
+  function hideRegionInfo() {
+    setTimeout(() => {
+      infoBox.classList.remove("show");
+    }, 300); // Delay of 300 milliseconds
+  }
 });
 
 // $(document).ready(function () {
